@@ -3,6 +3,8 @@ import TodoData from './component/todo/TodoData'
 import TodoNew from './component/todo/TodoNew'
 import ReactLogo from './assets/react.svg';
 import { useState } from 'react';
+import Header from './component/layout/header';
+import Footer from './component/layout/footer';
 
 const App = () => {
   // sử dụng Hook thực thi nhiều lần
@@ -32,7 +34,8 @@ const App = () => {
   
   //{key:value}
   return ( 
-    
+    <>
+      <Header/>
       <div className="todo-container">
         <div className="todo-title">Todo List</div>
       <TodoNew
@@ -51,7 +54,8 @@ const App = () => {
       }
       
       </div>
-    
+      <Footer/>
+    </>
   )
 }
 
