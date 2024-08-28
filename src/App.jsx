@@ -9,9 +9,6 @@ const App = () => {
     // { id: 1, name: "Learning REACTJS" },
     // { id: 2, name: "Watching Youtube" }
   ])
-    
-    
-  
   const AddNewTodo = (name) => {
     const newTodo = {
       id: randomIntFromInterval(1,1000000),
@@ -24,7 +21,13 @@ const App = () => {
     // min and max included
       return Math.floor(Math.random() * (max - min + 1) + min);
   }
-  
+  const deleteTodo = (id) => {
+    // Xoa dong
+    const newTodo = todoList.filter(item => item.id !== id)
+    // gắn giá trị ngược vào hàm setTodoList
+    setTodoList(newTodo)
+    
+  }
   
   //{key:value}
   return ( 
@@ -37,6 +40,7 @@ const App = () => {
       {todoList.length > 0 ?
         <TodoData
           todoList={todoList}
+          deleteTodo={deleteTodo}
         />
         :
         <div className='todo-image'>
