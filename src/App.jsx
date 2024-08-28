@@ -6,15 +6,11 @@ import { useState } from 'react';
 
 const App = () => {
   const [todoList, setTodoList] = useState([
-    { id: 1, name: "Learning REACTJS" },
-    { id: 2, name: "Watching Youtube" }
+    // { id: 1, name: "Learning REACTJS" },
+    // { id: 2, name: "Watching Youtube" }
   ])
-    const tenhang = "Thép Cuộn ";
-    const macuon = "TZ244";
-    const data = {
-      soluong: "167",
-      khoiluong: "29000"
-  }
+    
+    
   
   const AddNewTodo = (name) => {
     const newTodo = {
@@ -39,9 +35,6 @@ const App = () => {
         AddNewTodo = {AddNewTodo}
       />
       <TodoData
-        name={tenhang}
-        macuon={macuon}
-        data={data}
         todoList={todoList}
         
         />
