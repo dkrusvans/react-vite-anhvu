@@ -14,7 +14,17 @@ import './styles/global.css'
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>,
+    element: <App />,
+    children: [
+      {
+        path: "/products",
+        element: <Products/>
+      },
+      {
+        path: "/users",
+        element: <UsersPage/>
+      }
+    ]
   },
   {
     path: "/login",
@@ -24,15 +34,8 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register/>
-  },
-  {
-    path: "/products",
-    element: <Products/>
-  },
-  {
-    path: "/users",
-    element: <UsersPage/>
   }
+  
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
