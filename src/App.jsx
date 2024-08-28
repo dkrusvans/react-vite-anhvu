@@ -5,6 +5,7 @@ import ReactLogo from './assets/react.svg';
 import { useState } from 'react';
 
 const App = () => {
+  // sử dụng Hook thực thi nhiều lần
   const [todoList, setTodoList] = useState([
     // { id: 1, name: "Learning REACTJS" },
     // { id: 2, name: "Watching Youtube" }
@@ -22,7 +23,7 @@ const App = () => {
       return Math.floor(Math.random() * (max - min + 1) + min);
   }
   const deleteTodo = (id) => {
-    // Xoa dong
+    // Xóa Dòng ý nghia code là giữ lại những item không được chọn
     const newTodo = todoList.filter(item => item.id !== id)
     // gắn giá trị ngược vào hàm setTodoList
     setTodoList(newTodo)
@@ -37,6 +38,7 @@ const App = () => {
       <TodoNew
         AddNewTodo = {AddNewTodo}
       />
+      {/* Câu điều Kiện nếu phần tử lớn hơn 0 thì xóa logo ngược lại */}
       {todoList.length > 0 ?
         <TodoData
           todoList={todoList}
