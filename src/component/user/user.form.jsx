@@ -1,6 +1,7 @@
-import { Button, Input, notification } from "antd";
+import { Button, Input, notification, Modal } from "antd";
 import { useState } from "react";
 import { createUserAPI } from "../../services/api.service";
+
 
 
 
@@ -9,8 +10,12 @@ const UserForm = () => {
     const [email, setEmail] = useState("");
     const [passWords, setPasswords] = useState("");
     const [phoneNumber, setPhonenumber] = useState("");
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
     
-    const handleClickBtn = async () => {
+    
+    const handleSubmitBtn = async () => {
+        
         const res = await createUserAPI(fullName, email, passWords, phoneNumber);
         if (res.data) {
             notification.success({
@@ -18,6 +23,7 @@ const UserForm = () => {
                 description: " Tao User Thanh Cong !"
                 
             })
+            setIsModalOpen(false)
         } else {
             notification.error({
                 message: "Create User",
@@ -27,39 +33,53 @@ const UserForm = () => {
             
     }
     return (
-        <div className="user-form"style={{margin:"20px"}}>
-            <div style={{display:"flex",gap:"10px",flexDirection:"column"}}>
-                <div>
-                    <span>FullName</span>
-                    <Input value={fullName}
-                        onChange={(event)=>{setFullname(event.target.value)}}
-                    />
-                </div>
-                <div>
-                    <span>Email</span>
-                    <Input value={email}
-                        onChange={(event) => { setEmail(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <span>Passwords</span>
-                    <Input value={passWords}
-                        onChange={(event) => { setPasswords(event.target.value) }}
-                    />
-                </div>
-                <div>
-                    <span>Phone Number</span>
-                    <Input value={phoneNumber}
-                        onChange={(event) => { setPhonenumber(event.target.value) }}
-                    />
-                </div>
+        <div className="user-form"style={{margin:"10px"}}>
                 <div> 
-                    <Button
+                    <div style={{display:"flex",justifyContent:"space-between"}}>
+                        <h3>Table Users</h3>
+                        <Button
                         type="primary"
-                        onClick={handleClickBtn}
-                    >Create User</Button>
+                        onClick={() => setIsModalOpen(true)}
+                        >Create User</Button>
+                    </div>
+                    <Modal
+                        title="Create User"
+                        open={isModalOpen}
+                        onOk={()=>handleSubmitBtn()}
+                        onCancel={() => setIsModalOpen(false)}
+                        maskClosable={false}
+                        okText={"CREATE"}
+                    >
+
+                        <div style={{display:"flex",gap:"15px",flexDirection:"column"}}>
+                            <div>
+                                <h3>FullName</h3>
+                                <Input value={fullName}
+                                    onChange={(event)=>{setFullname(event.target.value)}}
+                                />
+                            </div>
+                        
+                            <div>
+                                <h3>Email</h3>
+                                <Input value={email}
+                                    onChange={(event) => { setEmail(event.target.value) }}
+                                />
+                            </div>
+                                <div>
+                                <h3>Passwords</h3>
+                                <Input value={passWords}
+                                    onChange={(event) => { setPasswords(event.target.value) }}
+                                />
+                                </div>
+                            <div>
+                                <h3>Phone Number</h3>
+                                <Input value={phoneNumber}
+                                    onChange={(event) => { setPhonenumber(event.target.value) }}
+                                />
+                                </div>
+                        </div>
+                    </Modal>
                 </div>
-            </div>
         </div>
     )
 }

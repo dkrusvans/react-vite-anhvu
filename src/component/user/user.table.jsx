@@ -4,21 +4,19 @@ import { fetchAllUserAPI } from '../../services/api.service';
 
 
 const UserTable = () => {
-  const [dataUsers, setdataUsers] = useState([
-    { _id: "eric", fullName: 25, email: "Hn" },
-    { _id: "anhvu", fullName: 25, email: "Hcm" }
-    
-  ]);
+  const [dataUsers, setdataUsers] = useState([]);
+  
   useEffect(() => {
     console.log("Run useEffect 1111")
     loadUser();
-  },[]);
+  }, []);
+  
       const columns = [
-        {
-          title: 'Id',
-          dataIndex: '_id',
+        // {
+        //   title: 'Id',
+        //   dataIndex: '_id',
           
-        },
+        // },
         {
           title: 'Full Name',
           dataIndex: 'fullName',
@@ -27,6 +25,11 @@ const UserTable = () => {
         {
           title: 'Email',
           dataIndex: 'email',
+          
+        },
+        {
+          title: 'Phone Number',
+          dataIndex: 'phone',
           
         }
         // {
