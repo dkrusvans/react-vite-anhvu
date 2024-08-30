@@ -5,7 +5,8 @@ import { createUserAPI } from "../../services/api.service";
 
 
 
-const UserForm = () => {
+const UserForm = (props) => {
+    const { loadUser } = props;
     const [fullName, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [passWords, setPasswords] = useState("");
@@ -23,7 +24,8 @@ const UserForm = () => {
                 description: " Tao User Thanh Cong !"
                 
             })
-            setIsModalOpen(false)
+            resetAndCloseModal();
+            await loadUser();
         } else {
             notification.error({
                 message: "Create User",
@@ -32,6 +34,16 @@ const UserForm = () => {
         }
             
     }
+
+    const resetAndCloseModal = () => {
+        setIsModalOpen(false)
+        setFullname("");
+        setEmail("");
+        setPasswords("");
+        setPhonenumber("");
+
+    }
+
     return (
         <div className="user-form"style={{margin:"10px"}}>
                 <div> 
@@ -46,7 +58,7 @@ const UserForm = () => {
                         title="Create User"
                         open={isModalOpen}
                         onOk={()=>handleSubmitBtn()}
-                        onCancel={() => setIsModalOpen(false)}
+                        onCancel={() => resetAndCloseModal()}
                         maskClosable={false}
                         okText={"CREATE"}
                     >
