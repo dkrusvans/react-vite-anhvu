@@ -1,20 +1,14 @@
-import { Button, Input, notification, Modal } from "antd";
 import { useState } from "react";
+import { Input, notification, Modal } from "antd";
 import { createUserAPI } from "../../services/api.service";
 
-
-
-
-
-const UserForm = (props) => {
-    const { loadUser } = props;
+const UpdateUserModal = () => {
     const [fullName, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [passWords, setPasswords] = useState("");
     const [phoneNumber, setPhonenumber] = useState("");
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const [isModalOpen, setIsModalOpen] = useState(true);
     
     const handleSubmitBtn = async () => {
         
@@ -26,7 +20,7 @@ const UserForm = (props) => {
                 
             })
             resetAndCloseModal();
-            await loadUser();
+            // await loadUser();
         } else {
             notification.error({
                 message: "Create User",
@@ -35,33 +29,15 @@ const UserForm = (props) => {
         }
             
     }
-
-    const resetAndCloseModal = () => {
-        setIsModalOpen(false);
-        setFullname("");
-        setEmail("");
-        setPasswords("");
-        setPhonenumber("");
-
-    }
-
+    
     return (
-        <div className="user-form"style={{margin:"10px"}}>
-                <div> 
-                    <div style={{display:"flex",justifyContent:"space-between"}}>
-                        <h3>Table Users</h3>
-                        <Button
-                        type="primary"
-                        onClick={() => setIsModalOpen(true)}
-                        >Create User</Button>
-                    </div>
-                    <Modal
-                        title="Create User"
+        <Modal
+                        title="Update User"
                         open={isModalOpen}
                         onOk={()=>handleSubmitBtn()}
                         onCancel={() => resetAndCloseModal()}
                         maskClosable={false}
-                        okText={"CREATE"}
+                        okText={"SAVE"}
                     >
 
                         <div style={{display:"flex",gap:"15px",flexDirection:"column"}}>
@@ -91,9 +67,7 @@ const UserForm = (props) => {
                                 />
                                 </div>
                         </div>
-                    </Modal>
-                </div>
-        </div>
+        </Modal>
     )
 }
-export default UserForm;
+export default UpdateUserModal;

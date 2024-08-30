@@ -1,97 +1,69 @@
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { Table } from 'antd';
+import UpdateUserModal from './update.user.modal';
 
 
 
 
 const UserTable = (props) => {
-      const { dataUsers } = props
+  const { dataUsers } = props
   
   
-      const columns = [
-        // {
-        //   title: 'Id',
-        //   dataIndex: '_id',
+  const columns = [
+    // {
+    //   title: 'Id',
+    //   dataIndex: '_id',
           
-        // },
-        {
-          title: 'Full Name',
-          dataIndex: 'fullName',
+    // },
+    {
+      title: 'Full Name',
+      dataIndex: 'fullName',
+      render: (_, record) => {
+        return (
+          <>
+          <a href='#'>{record.fullName}</a>
           
-        },
-        {
-          title: 'Email',
-          dataIndex: 'email',
+          </>
+        )
+      }
           
-        },
-        {
-          title: 'Phone Number',
-          dataIndex: 'phone',
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
           
-        }
-        // {
-        //   title: 'Tags',
-        //   key: 'tags',
-        //   dataIndex: 'tags',
-        //   render: (_, { tags }) => (
-        //     <>
-        //       {tags.map((tag) => {
-        //         let color = tag.length > 5 ? 'geekblue' : 'green';
-        //         if (tag === 'loser') {
-        //           color = 'volcano';
-        //         }
-        //         return (
-        //           <Tag color={color} key={tag}>
-        //             {tag.toUpperCase()}
-        //           </Tag>
-        //         );
-        //       })}
-        //     </>
-        //   ),
-        // },
-        // {
-        //   title: 'Action',
-        //   key: 'action',
-        //   render: (_, record) => (
-        //     <Space size="middle">
-        //       <a>Invite {record.name}</a>
-        //       <a>Delete</a>
-        //     </Space>
-        //   ),
-        // },
-      ];
-      // const data = [
-      //   {
-      //     key: '1',
-      //     name: 'John Brown',
-      //     age: 32,
-      //     address: 'New York No. 1 Lake Park',
-      //     tags: ['nice', 'developer'],
-      //   },
-      //   {
-      //     key: '2',
-      //     name: 'Jim Green',
-      //     age: 42,
-      //     address: 'London No. 1 Lake Park',
-      //     tags: ['loser'],
-      //   },
-      //   {
-      //     key: '3',
-      //     name: 'Joe Black',
-      //     age: 32,
-      //     address: 'Sydney No. 1 Lake Park',
-      //     tags: ['cool', 'teacher'],
-      //   },
-      // ];
+    },
+    {
+      title: 'Phone Number',
+      dataIndex: 'phone',
+          
+    },
+    {
+      title: 'Action',
+      key: 'action',
+      render: (_, record) => (
+        <div style={{display:"flex",gap:"20px"}}>
+          <EditOutlined style={{cursor:"pointer",color:"blue"}}/>
+          <DeleteOutlined style={{cursor:"pointer",color:"red"}}/>
+        </div>
+      ),
+    },
+];
+  
+
   
   
   
 
     return (
+      <>
       <Table
         columns={columns}
         dataSource={dataUsers} 
         rowKey={"_id"}
         />
+      <UpdateUserModal/>
+      </>
     )
 }
 export default UserTable;
