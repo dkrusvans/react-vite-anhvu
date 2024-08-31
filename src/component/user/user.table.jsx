@@ -10,6 +10,7 @@ const UserTable = (props) => {
   const { dataUsers } = props;
   
   const [isModalUpdateOpen, setIsModalUpdateOpen] = useState(false);
+  const [dataUpdate, setDataUpdate] = useState(null);
 
   const columns = [
     // {
@@ -47,6 +48,7 @@ const UserTable = (props) => {
         <div style={{display:"flex",gap:"20px"}}>
           <EditOutlined
             onClick={() => {
+              setDataUpdate(record);
               setIsModalUpdateOpen(true);
             }}
             style={{ cursor: "pointer", color: "blue" }} />
@@ -60,7 +62,7 @@ const UserTable = (props) => {
   
   
   
-
+    
     return (
       <>
       <Table
@@ -71,6 +73,8 @@ const UserTable = (props) => {
         <UpdateUserModal
           isModalUpdateOpen={isModalUpdateOpen}
           setIsModalUpdateOpen={setIsModalUpdateOpen}
+          dataUpdate={dataUpdate}
+          setDataUpdate={setDataUpdate}
         />
       </>
     )

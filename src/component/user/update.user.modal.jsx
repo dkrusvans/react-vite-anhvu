@@ -1,15 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Input, notification, Modal } from "antd";
 import { createUserAPI } from "../../services/api.service";
 
 const UpdateUserModal = (props) => {
     const [fullName, setFullname] = useState("");
     const [email, setEmail] = useState("");
-    const [passWords, setPasswords] = useState("");
+    // const [passWords, setPasswords] = useState("");
     const [phoneNumber, setPhonenumber] = useState("");
 
-    const {isModalUpdateOpen, setIsModalUpdateOpen} = props;
+    const { isModalUpdateOpen, setIsModalUpdateOpen, dataUpdate, setDataUpdate } = props;
     
+    useEffect(() => {
+        console.log("check dataUpdate: ", dataUpdate)
+        if (dataUpdate) {
+            setFullname(dataUpdate.fullName);
+            setEmail(dataUpdate.email);
+            setPhonenumber(dataUpdate.phone);
+
+        }
+    },[dataUpdate])
+
     const handleSubmitBtn = async () => {
         
         const res = await createUserAPI(fullName, email, passWords, phoneNumber);
@@ -36,10 +46,10 @@ const UpdateUserModal = (props) => {
     const resetAndCloseModal = () => {
         setIsModalUpdateOpen(false);
         setFullname("");
-        setEmail("");
-        setPasswords("");
+        // setEmail("");
+        // setPasswords("");
         setPhonenumber("");
-
+        setDataUpdate(null);
     }
     
     return (
@@ -66,12 +76,12 @@ const UpdateUserModal = (props) => {
                                     onChange={(event) => { setEmail(event.target.value) }}
                                 />
                             </div>
-                                <div>
+                                {/* <div>
                                 <h3>Passwords</h3>
                                 <Input value={passWords}
                                     onChange={(event) => { setPasswords(event.target.value) }}
                                 />
-                                </div>
+                                </div> */}
                             <div>
                                 <h3>Phone Number</h3>
                                 <Input value={phoneNumber}
