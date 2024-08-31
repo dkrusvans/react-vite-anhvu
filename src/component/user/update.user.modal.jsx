@@ -2,17 +2,20 @@ import { useState } from "react";
 import { Input, notification, Modal } from "antd";
 import { createUserAPI } from "../../services/api.service";
 
-const UpdateUserModal = () => {
+const UpdateUserModal = (props) => {
     const [fullName, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [passWords, setPasswords] = useState("");
     const [phoneNumber, setPhonenumber] = useState("");
 
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    const {isModalUpdateOpen, setIsModalUpdateOpen} = props;
     
     const handleSubmitBtn = async () => {
         
         const res = await createUserAPI(fullName, email, passWords, phoneNumber);
+        
+        
+        
         if (res.data) {
             notification.success({
                 message: "Erorr Create User",
@@ -27,13 +30,22 @@ const UpdateUserModal = () => {
                 description: JSON.stringify(res.message)
             })
         }
+        
             
+    }
+    const resetAndCloseModal = () => {
+        setIsModalUpdateOpen(false);
+        setFullname("");
+        setEmail("");
+        setPasswords("");
+        setPhonenumber("");
+
     }
     
     return (
         <Modal
                         title="Update User"
-                        open={isModalOpen}
+                        open={isModalUpdateOpen}
                         onOk={()=>handleSubmitBtn()}
                         onCancel={() => resetAndCloseModal()}
                         maskClosable={false}
