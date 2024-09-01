@@ -1,13 +1,15 @@
-import { Drawer } from "antd";
+import { Drawer, notification } from "antd";
 import { Button } from 'antd';
 import { useState } from "react";
+import { handleUploadFile, updateUserAvatarAPI } from "../../services/api.service";
 
 const ViewUserDetail = (props) => {
     const {
         dataDetail,
         setDataDetail,
         isDetailOpen,
-        setIsDetailOpen
+        setIsDetailOpen,
+        loadUser
     } = props;
 
     const [selectedFile, setSelectedFile] = useState(null)
@@ -27,12 +29,53 @@ const ViewUserDetail = (props) => {
             setPreview(URL.createObjectURL(file))
         }
         
-    }    
-    console.log("Check File: ",preview)
+    }  
+    const handleUpdateUserAvatar = async() => {
+        //step 1 : Upload File
+        const resUpload = await handleUploadFile(selectedFile, "avatar")
+        if (resUpload.data) {
+            //success
+            const newAvatar = resUpload.data.fileUploaded;
+            // step 2 : Update user
+            const resUpdateAvatar = await updateUserAvatarAPI(
+                newAvatar,
+                dataDetail._id,
+                dataDetail.fullName,
+                dataDetail.phone)
+            if (resUpload.data) {
+                setIsDetailOpen(false);
+                setSelectedFile(null);
+                setPreview(null);
+                await loadUser();
+
+                notification.success({
+                    message: "Update user avatar",
+                    description: "Cap nhat Avatar thanh cong ! "
+                })
+            } else {
+                notification.error({
+                    message: "Error update Avatar",
+                    description:JSON.stringify(resUpdateAvatar.message)
+                })
+            }
+            
+        } else {
+            notification.error({
+                message: "Error upload file",
+                description:JSON.stringify(resUpload.message)
+            })
+            
+
+        }
+        
+        
+
+    }
+    
 
     return (
         <Drawer
-            width={"40vw"}
+            width={"30vw"}
             title="Chi Tiet User"
             onClose={() => {
                 setDataDetail(null);
@@ -51,7 +94,7 @@ const ViewUserDetail = (props) => {
                 <p>Avatar</p>
                 <div style={{
                     marginTop: "10px",
-                    height: "100px", width: "150px",
+                    height: "650px", width: "520px",
                     border: "1px solid#ccc"
                     
                 }}>
@@ -79,18 +122,23 @@ const ViewUserDetail = (props) => {
                     
                 </div>
                 {preview &&
-                
+                <>
                 <div style={{
                     marginTop: "10px",
-                    height: "100px", width: "150px",
-                    border: "1px solid#ccc"
+                    marginBottom:"15px",
+                    height: "100px", width: "150px"
+                    
                     
                 }}>
                     <img
                         style={{ height: "100%", width: "100%",objectFit:"contain"}}
                         src={preview} />
-                </div>
-                
+                    </div>
+                    <Button type="primary"
+                    onClick={()=>handleUpdateUserAvatar()}
+                    >Save</Button>
+
+                </>
                 }
                 
                 
