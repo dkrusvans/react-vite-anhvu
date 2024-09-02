@@ -7,7 +7,7 @@ const UsersPage = () => {
     // Lift-up State
     const [dataUsers, setdataUsers] = useState([]);
     const [current, setCurrent] = useState(1);
-    const [pageSize, setPageSize] = useState(15);
+    const [pageSize, setPageSize] = useState(12);
     const [total, setTotal] = useState(0);
 
     //emty array = run once

@@ -1,6 +1,6 @@
-import { Button, Form, Input, message, notification, Row, Col} from "antd";
+import { Button, Form, Input, Divider, notification, Row, Col} from "antd";
 import { registerUserAPI } from "../services/api.service";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
     const [form] = Form.useForm();
@@ -32,7 +32,7 @@ const RegisterPage = () => {
         <Form
             form={form}
             layout="vertical"
-            style={{margin:"10px"}}
+            style={{margin:"30px"}}
             // name="basic"
             // labelCol={{
             // span: 8,
@@ -48,7 +48,7 @@ const RegisterPage = () => {
             // onFinishFailed={onFinishFailed}
             // autoComplete="off"
         >
-
+            <h3 style={{textAlign:"center"}}>Dang ky tai khoan</h3>
             <Row justify={"center"}>
                 <Col xs={24} md={8}>
                     <Form.Item
@@ -119,19 +119,23 @@ const RegisterPage = () => {
                 </Col>
             </Row>
             <Row justify={"center"}>
-                <div>
-                    <Button onClick={() => form.submit()}
-                        type="primary">Register</Button>
-                    
-                    {/* tu field data */}
-                    {/* <Button onClick={() => { 
-                        form.setFieldsValue({
-                            email: "dkrusvan18091985@gmail.com"
-                        })
+                <Col xs={24} md={8}>
+                    <div>
+                        <Button onClick={() => form.submit()}
+                            type="primary">Register</Button>
                         
-                    }}>Test</Button> */}
-                
-                </div>
+                        {/* tu field data */}
+                        {/* <Button onClick={() => { 
+                            form.setFieldsValue({
+                                email: "dkrusvan18091985@gmail.com"
+                            })
+                            
+                        }}>Test</Button> */}
+                    </div>
+                    <Divider/>
+                        <div>Da co Tai khoan ? <Link to={"/login"}>Dang nhap tai day</Link></div>
+                    
+                </Col>
             </Row>   
                 
             

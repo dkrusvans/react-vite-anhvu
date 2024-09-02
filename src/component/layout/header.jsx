@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Menu } from 'antd';
 import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { children, useState } from 'react';
 
 const Header = () => {
     const [current, setCurrent] = useState('');
@@ -26,7 +26,22 @@ const Header = () => {
           key: 'products',
           icon: <SettingOutlined />,
           
-        }
+        },
+        {
+          label: "Cai Dat",
+          key: "setting",
+          icon: <SettingOutlined />,
+          children: [
+            {
+            label: <Link to={"/login"}>Dang Nhap</Link>,
+            key:'login',
+            },
+            {
+              label: "Dang Xuat",
+              key:"logout",
+            },
+          ],
+        },
         
       ];
     // sử dụng Link để ko load lại trang

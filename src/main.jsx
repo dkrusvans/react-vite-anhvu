@@ -1,14 +1,11 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from './pages/login.jsx';
 import Register from './pages/register.jsx';
 import Products from './pages/products.jsx';
 import UsersPage from './pages/users.jsx';
-import './styles/global.css'
+import './styles/global.css';
 import TodoApp from './component/todo/TodoApp.jsx';
 import ErrorPage from './pages/error.jsx';
 
