@@ -3,7 +3,7 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from './pages/login.jsx';
 import Register from './pages/register.jsx';
-import Products from './pages/products.jsx';
+import LenhNhapXuat from './pages/lenhnhapxuat.jsx';
 import UsersPage from './pages/users.jsx';
 import './styles/global.css';
 import TodoApp from './component/todo/TodoApp.jsx';
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
         path: "/products",
         element: (
         <PrivateRoute>
-          <Products/>
+          <LenhNhapXuat/>
           </PrivateRoute>
         )
       },
