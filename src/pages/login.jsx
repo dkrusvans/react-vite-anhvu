@@ -2,7 +2,8 @@ import { ArrowRightOutlined } from "@ant-design/icons";
 import { Button, Col, Divider, Form, Input, message, notification, Row } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { loginAPI } from "../services/api.service";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../component/context/auth.context";
 
 
 const LoginPage = () => {
@@ -10,12 +11,15 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
     const navigate = useNavigate();
+    const {setUser} = useContext(AuthContext); 
 
     const onFinish = async (values) => {
         setLoading(true)
         const res = await loginAPI(values.email, values.password);
         if (res.data) {
-            message.success("Dang nhap thanh cong")
+            message.success("Dang nhap thanh cong");
+            localStorage.setItem("access_token", res.data.access_token);
+            setUser(res.data.user);
             navigate("/");
         } else {
             notification.error({
