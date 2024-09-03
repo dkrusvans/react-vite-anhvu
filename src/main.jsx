@@ -3,13 +3,14 @@ import App from './App.jsx'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import LoginPage from './pages/login.jsx';
 import Register from './pages/register.jsx';
-import LenhNhapXuat from './pages/lenhnhapxuat.jsx';
+import BookPage from './pages/book.jsx';
 import UsersPage from './pages/users.jsx';
 import './styles/global.css';
 import TodoApp from './component/todo/TodoApp.jsx';
 import ErrorPage from './pages/error.jsx';
 import { AuthWrapper } from './component/context/auth.context.jsx';
 import PrivateRoute from './pages/private.route.jsx';
+import 'nprogress/nprogress.css';
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         path: "/products",
         element: (
         <PrivateRoute>
-          <LenhNhapXuat/>
+          <BookPage/>
           </PrivateRoute>
         )
       },
